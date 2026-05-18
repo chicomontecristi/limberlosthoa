@@ -1,0 +1,66 @@
+backend:
+  name: github
+  repo: chicomontecristi/limberlosthoa
+  branch: main
+  base_url: https://api.netlify.com  # free OAuth proxy
+
+media_folder: public/uploads
+public_folder: /uploads
+
+site_url: https://limberlosthoa.org
+display_url: https://limberlosthoa.org
+logo_url: /logo.png
+
+collections:
+  - name: pages
+    label: Static Pages
+    files:
+      - file: content/home.md
+        label: Homepage
+        name: home
+        fields:
+          - { name: hero_title,   label: Hero Headline, widget: string }
+          - { name: hero_image,   label: Hero Image,    widget: image, required: false }
+          - { name: welcome,      label: Welcome Text,  widget: markdown }
+      - file: content/contact.md
+        label: Contact Page
+        name: contact
+        fields:
+          - { name: board_email,  label: Board Email,   widget: string }
+          - { name: address,      label: Address,       widget: text, required: false }
+          - { name: body,         label: Body,          widget: markdown }
+
+  - name: events
+    label: Community Events
+    folder: content/events
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { name: title,    label: Event Title, widget: string }
+      - { name: date,     label: Date & Time, widget: datetime, format: "YYYY-MM-DD HH:mm" }
+      - { name: location, label: Where,       widget: string }
+      - { name: image,    label: Photo,       widget: image, required: false }
+      - { name: body,     label: Details,     widget: markdown }
+
+  - name: docs
+    label: HOA Documents
+    folder: content/docs
+    create: true
+    fields:
+      - { name: title,       label: Document Title, widget: string }
+      - { name: category,    label: Category,       widget: select,
+          options: ["Rules", "Bylaws", "Meeting Minutes", "Forms"] }
+      - { name: pdf,         label: PDF File,       widget: file }
+      - { name: posted_date, label: Posted,         widget: datetime }
+
+  - name: members
+    label: Board & Community Members
+    folder: content/members
+    create: true
+    slug: "{{order}}-{{slug}}"
+    fields:
+      - { name: name,    label: Full Name,     widget: string }
+      - { name: role,    label: Role / Title,  widget: string }
+      - { name: photo,   label: Photo,         widget: image, required: false }
+      - { name: order,   label: Display Order, widget: number, default: 100 }
+      - { name: bio,     label: Short Bio,     widget: text, required: false }
