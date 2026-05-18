@@ -1,0 +1,12 @@
+{
+  // Cloudflare Workers + Static Assets config.
+  // Tells wrangler to deploy the pre-built /out folder as static HTML,
+  // bypassing the Next.js SSR/runtime path entirely.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "limberlosthoa",
+  "compatibility_date": "2024-12-01",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}
